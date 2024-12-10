@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>    
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HelperUtils\HelperUtils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="EntityHelpers\" />
+    <Folder Include="Enums\" />
+  </ItemGroup>
+
+</Project>

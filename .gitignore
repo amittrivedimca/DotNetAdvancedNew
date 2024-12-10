@@ -13,3 +13,14 @@
 /DotNetAdvancedAPIs/ShoppingCartRestAPI/Persistence/obj
 /DotNetAdvancedAPIs/ShoppingCartRestAPI/ShoppingCartRestAPI/bin/Debug/net8.0
 /DotNetAdvancedAPIs/ShoppingCartRestAPI/ShoppingCartRestAPI/obj
+/DotNetAdvancedAPIs/CatalogRestAPI/.vs
+/DotNetAdvancedAPIs/CatalogRestAPI/Application/bin/Debug/net8.0
+/DotNetAdvancedAPIs/CatalogRestAPI/Application/obj
+/DotNetAdvancedAPIs/CatalogRestAPI/CatalogRestAPI/bin/Debug/net8.0
+/DotNetAdvancedAPIs/CatalogRestAPI/CatalogRestAPI/obj
+/DotNetAdvancedAPIs/CatalogRestAPI/Domain/bin/Debug/net8.0
+/DotNetAdvancedAPIs/CatalogRestAPI/Domain/obj
+/DotNetAdvancedAPIs/CatalogRestAPI/HelperUtils/bin/Debug/net8.0
+/DotNetAdvancedAPIs/CatalogRestAPI/HelperUtils/obj
+/DotNetAdvancedAPIs/CatalogRestAPI/Persistence/bin/Debug/net8.0
+/DotNetAdvancedAPIs/CatalogRestAPI/Persistence/obj
