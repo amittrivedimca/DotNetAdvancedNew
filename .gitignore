@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/DotNetAdvancedAPIs/.vs/DotNetAdvancedAPIs
+/DotNetAdvancedAPIs/ShoppingCartRestAPI/Application/bin/Debug/net8.0
+/DotNetAdvancedAPIs/ShoppingCartRestAPI/Application/obj
+/DotNetAdvancedAPIs/ShoppingCartRestAPI/Domain/bin/Debug/net8.0
+/DotNetAdvancedAPIs/ShoppingCartRestAPI/Domain/obj
+/DotNetAdvancedAPIs/ShoppingCartRestAPI/Domain.UnitTests/bin/Debug/net8.0
+/DotNetAdvancedAPIs/ShoppingCartRestAPI/Domain.UnitTests/obj
+/DotNetAdvancedAPIs/ShoppingCartRestAPI/Persistence/bin/Debug/net8.0
+/DotNetAdvancedAPIs/ShoppingCartRestAPI/Persistence/obj
+/DotNetAdvancedAPIs/ShoppingCartRestAPI/ShoppingCartRestAPI/bin/Debug/net8.0
+/DotNetAdvancedAPIs/ShoppingCartRestAPI/ShoppingCartRestAPI/obj
