@@ -1,4 +1,5 @@
 using Application;
+using CatalogMessageBroker;
 using Microsoft.OpenApi.Models;
 using Persistence;
 using Persistence.DB;
@@ -41,6 +42,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var services = builder.Services;
+services.AddMessageBrokerServices(builder.Configuration);
 services.AddApplicationServices();
 services.AddPersistenceServices(builder.Configuration);
 

@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.BusinessLogic;
+using Domain.Entities;
 using Domain.RepositoryInterfaces;
 using HelperUtils;
 
@@ -47,12 +48,26 @@ namespace Application.ProductAL
             return (DBOperationStatus.NotFound, null);
         }
 
-        public Task<DBOperationStatus> UpdateAsync(ProductDTO productDTO)
+        public async Task<DBOperationStatus> UpdateAsync(ProductDTO productDTO)
         {
-            var category = _mapper.Map<ProductDTO, Product>(productDTO);
-            return _productRepository.UpdateAsync(category);
+            var product = _mapper.Map<ProductDTO, Product>(productDTO);
+            DBOperationStatus status = await _productRepository.UpdateAsync(product);
+            ProductBL productBL = new ProductBL(product);
+            productBL.OnProductUpdated += ProductBL_OnProductUpdated;
+            productBL.OnProductUpdateFailed += ProductBL_OnProductUpdateFailed;
+            productBL.RaiseProductUpdatedEvent(status);            
+            return status;
         }
 
-      
+        private void ProductBL_OnProductUpdated(ProductBL sender, Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ProductBL_OnProductUpdateFailed(ProductBL sender, Product product)
+        {
+            throw new NotImplementedException();
+        }
+                
     }
 }

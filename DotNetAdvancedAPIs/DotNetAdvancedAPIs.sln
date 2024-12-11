@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShoppingCart", "ShoppingCart", "{289EAF41-9CF7-4A64-99A7-EC2B1948B69D}"
 EndProject
@@ -44,6 +44,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "CatalogRestAPI\Persistence\Persistence.csproj", "{77BBE26C-F929-432E-B318-0C7F746C7467}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogRestAPI", "CatalogRestAPI\CatalogRestAPI\CatalogRestAPI.csproj", "{61BBFE9E-3E30-4CC0-8992-1A252BBBD8AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogMessageBroker", "CatalogRestAPI\CatalogMessageBroker\CatalogMessageBroker.csproj", "{49AF2C3B-81DE-4AD5-BCD2-59E988D726F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,10 @@ Global
 		{61BBFE9E-3E30-4CC0-8992-1A252BBBD8AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61BBFE9E-3E30-4CC0-8992-1A252BBBD8AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61BBFE9E-3E30-4CC0-8992-1A252BBBD8AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49AF2C3B-81DE-4AD5-BCD2-59E988D726F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49AF2C3B-81DE-4AD5-BCD2-59E988D726F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49AF2C3B-81DE-4AD5-BCD2-59E988D726F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49AF2C3B-81DE-4AD5-BCD2-59E988D726F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,5 +121,6 @@ Global
 		{C45C6D40-06CD-499D-8AF7-1C64202AD78C} = {EC6DDA08-D997-4A81-84FD-D081E337A426}
 		{77BBE26C-F929-432E-B318-0C7F746C7467} = {CE1F83DE-8672-45E3-B488-F1E5EE64BAFA}
 		{61BBFE9E-3E30-4CC0-8992-1A252BBBD8AE} = {36718098-8E4A-42AF-B706-58A3C0414089}
+		{49AF2C3B-81DE-4AD5-BCD2-59E988D726F3} = {CE1F83DE-8672-45E3-B488-F1E5EE64BAFA}
 	EndGlobalSection
 EndGlobal
