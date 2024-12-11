@@ -6,8 +6,8 @@ namespace Application.CategoryAL
     {
         public int ID { get; set; }
         public string Name { get; set; } = string.Empty;
-        public string Image { get; set; }
-        public CategoryDTO ParentCategory { get; private set; }
+        public string? Image { get; set; }
+        public CategoryDTO? ParentCategory { get; private set; }
 
         private class Mapping : Profile
         {

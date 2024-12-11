@@ -15,10 +15,13 @@ namespace Application.ProductAL
             _productRepository = repositoryManager.ProductRepository;
         }
 
-        public Task<DBOperationStatus> AddAsync(ProductDTO productDTO)
+        public async Task<DBOperationStatus> AddAsync(ProductDTO productDTO)
         {
+            productDTO.ID = 0;
             var product = _mapper.Map<ProductDTO, Product>(productDTO);
-            return _productRepository.AddAsync(product);
+            DBOperationStatus status = await _productRepository.AddAsync(product);
+            productDTO.ID = product.ID;
+            return status;
         }
 
         public Task<DBOperationStatus> DeleteAsync(int id)

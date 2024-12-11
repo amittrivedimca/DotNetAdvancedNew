@@ -65,7 +65,7 @@ namespace CatalogRestAPI.Controllers
             }
 
             ApiResponse<ProductDTO> apiResponse = new ApiResponse<ProductDTO>();
-
+            apiResponse.Data = result.Item2;
             apiResponse.Links.Add(new Link()
             {
                 Href = this.Url.ActionLink("GetById") ?? "",
@@ -104,7 +104,12 @@ namespace CatalogRestAPI.Controllers
         {
             try
             {
-                return (await _appManager.ProductProvider.AddAsync(product)).ToString();
+                DBOperationStatus status = await _appManager.ProductProvider.AddAsync(product);
+                return Ok(new
+                {
+                    Id = product.ID,
+                    Status = status.ToString()
+                });
             }
             catch (Exception ex)
             {

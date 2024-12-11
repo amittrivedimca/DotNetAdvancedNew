@@ -15,10 +15,12 @@ namespace Application.CategoryAL
             _categoryRepository = repositoryManager.CategoryRepository;
         }
 
-        public Task<DBOperationStatus> AddAsync(CategoryDTO categoryDTO)
+        public async Task<DBOperationStatus> AddAsync(CategoryDTO categoryDTO)
         {
             var category = _mapper.Map<CategoryDTO,Category>(categoryDTO);
-            return _categoryRepository.AddAsync(category);
+            DBOperationStatus status = await _categoryRepository.AddAsync(category);
+            categoryDTO.ID = category.ID;
+            return status;
         }
 
         public Task<DBOperationStatus> DeleteAsync(int id)

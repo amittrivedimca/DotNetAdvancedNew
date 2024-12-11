@@ -63,11 +63,16 @@ namespace CatalogRestAPI.Controllers
         [HttpPost(Name = "AddAsync")]
         [ProducesResponseType(StatusCodes.Status200OK)]        
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<string>> AddAsync(CategoryDTO category)
+        public async Task<IActionResult> AddAsync(CategoryDTO category)
         {
             try
             {
-                return (await _appManager.CategoryProvider.AddAsync(category)).ToString();
+                DBOperationStatus status = await _appManager.CategoryProvider.AddAsync(category);
+                return Ok(new
+                {
+                    Id = category.ID,
+                    Status = status.ToString()
+                });
             }
             catch (Exception ex)
             {
