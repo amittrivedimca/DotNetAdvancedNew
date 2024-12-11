@@ -93,8 +93,11 @@ namespace ShoppingCartRestAPI.Controllers
 
             try
             {
-                _applicationManager.CartProvider.AddItem(cartId, cartItem);
-                return Ok();
+                var dto = _applicationManager.CartProvider.AddItem(cartId, cartItem);
+                return Ok(new
+                {
+                    cartId = dto.CartId
+                });
             }
             catch(Exception ex)
             {
