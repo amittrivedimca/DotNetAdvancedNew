@@ -1,4 +1,4 @@
-﻿using Domain.RepositoryInterfaces;
+﻿using ProductDomain.RepositoryInterfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,5 +1,5 @@
-﻿using Domain.BusinessLogic;
-using Domain.Entities;
+﻿using ProductDomain.BusinessLogic;
+using ProductDomain.Entities;
 using LiteDB;
 
 namespace Persistence

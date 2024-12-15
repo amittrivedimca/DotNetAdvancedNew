@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.RepositoryInterfaces
+namespace ProductDomain.RepositoryInterfaces
 {
     public interface IRepositoryManager
     {

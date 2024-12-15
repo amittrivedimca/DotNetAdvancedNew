@@ -29,3 +29,5 @@
 /DotNetAdvancedAPIs/CatalogRestAPI/CatalogMessageBroker/obj
 /DotNetAdvancedAPIs/ShoppingCartRestAPI/CartMessageBroker/bin/Debug/net8.0
 /DotNetAdvancedAPIs/ShoppingCartRestAPI/CartMessageBroker/obj
+/DotNetAdvancedAPIs/MessageBroker/AzureMessageBroker/bin/Debug/net8.0
+/DotNetAdvancedAPIs/MessageBroker/AzureMessageBroker/obj

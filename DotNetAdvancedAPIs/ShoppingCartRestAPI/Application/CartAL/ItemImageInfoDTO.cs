@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Domain.Entities;
+using ProductDomain.Entities;
 
 namespace Application.CartAL
 {

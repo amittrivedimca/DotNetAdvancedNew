@@ -1,6 +1,6 @@
-﻿using Domain.Entities;
+﻿using ProductDomain.Entities;
 
-namespace Domain.RepositoryInterfaces
+namespace ProductDomain.RepositoryInterfaces
 {
     public interface ICartRepository
     {

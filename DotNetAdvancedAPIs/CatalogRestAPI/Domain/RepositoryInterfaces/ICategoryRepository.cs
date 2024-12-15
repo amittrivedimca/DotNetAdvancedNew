@@ -1,7 +1,7 @@
-﻿using Domain.Entities;
+﻿using ProductDomain.Entities;
 using HelperUtils;
 
-namespace Domain.RepositoryInterfaces
+namespace ProductDomain.RepositoryInterfaces
 {
     public interface ICategoryRepository
     {

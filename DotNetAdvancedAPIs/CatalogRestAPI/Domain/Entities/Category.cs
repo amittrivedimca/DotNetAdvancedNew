@@ -1,4 +1,4 @@
-﻿namespace Domain.Entities
+﻿namespace ProductDomain.Entities
 {
     public class Category
     {

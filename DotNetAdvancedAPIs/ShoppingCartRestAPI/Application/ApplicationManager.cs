@@ -1,7 +1,7 @@
 ﻿using Application.CartAL;
 using AutoMapper;
-using Domain.ExternalServiceInterfaces;
-using Domain.RepositoryInterfaces;
+using ProductDomain.ExternalServiceInterfaces;
+using ProductDomain.RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

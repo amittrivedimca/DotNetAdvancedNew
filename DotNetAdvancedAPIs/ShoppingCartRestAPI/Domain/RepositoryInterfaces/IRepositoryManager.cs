@@ -1,4 +1,4 @@
-﻿namespace Domain.RepositoryInterfaces
+﻿namespace ProductDomain.RepositoryInterfaces
 {
     public interface IRepositoryManager
     {

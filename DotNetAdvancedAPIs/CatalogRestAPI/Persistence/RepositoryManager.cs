@@ -1,4 +1,4 @@
-﻿using Domain.RepositoryInterfaces;
+﻿using ProductDomain.RepositoryInterfaces;
 using Persistence.DB;
 using System;
 using System.Collections.Generic;

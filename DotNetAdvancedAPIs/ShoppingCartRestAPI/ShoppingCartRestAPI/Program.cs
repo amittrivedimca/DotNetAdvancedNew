@@ -1,10 +1,10 @@
 using Application;
 using Asp.Versioning;
-using Domain.ExternalServiceInterfaces;
+using ProductDomain.ExternalServiceInterfaces;
 using Microsoft.OpenApi.Models;
 using Persistence;
 using System.Reflection;
-using CartMessageBroker;
+using AzureMessageBroker;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -86,7 +86,7 @@ services.AddApiVersioning(o => {
 
 services.AddApplicationServices();
 services.AddPersistenceServices(builder.Configuration);
-services.AddMessageBrokerServices(builder.Configuration);
+services.AddCartMessageBrokerServices(builder.Configuration);
 
 var app = builder.Build();
 

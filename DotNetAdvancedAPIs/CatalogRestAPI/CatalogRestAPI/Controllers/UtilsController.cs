@@ -1,4 +1,4 @@
-using CatalogMessageBroker;
+using AzureMessageBroker;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CatalogRestAPI.Controllers

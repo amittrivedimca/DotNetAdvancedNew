@@ -1,9 +1,6 @@
 ﻿using Application;
 using Application.CartAL;
 using Asp.Versioning;
-using Domain.BusinessLogic;
-using Domain.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ShoppingCartRestAPI.Controllers
@@ -129,15 +126,23 @@ namespace ShoppingCartRestAPI.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Receive And Process ProductChange Messages to update cart
         /// </summary>
         /// <returns></returns>
         [HttpGet(Name = "ReceiveAndProcessProductChangeMessages")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> ReceiveAndProcessProductChangeMessages()
         {
-            await _applicationManager.CartProvider.ReceiveAndProcessProductChangeMessages();
-            return Ok();
+            try
+            {
+                IEnumerable<string> cartIds = await _applicationManager.CartProvider.ReceiveAndProcessProductChangeMessages();
+                return Ok(new { updatedCartIds = cartIds });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,ex);
+            }
         }
     }
 }

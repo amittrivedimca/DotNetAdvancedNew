@@ -1,7 +1,7 @@
-﻿using Domain.BusinessLogic;
-using Domain.Entities;
-using Domain.ExternalServiceInterfaces;
-using Domain.RepositoryInterfaces;
+﻿using ProductDomain.BusinessLogic;
+using ProductDomain.Entities;
+using ProductDomain.ExternalServiceInterfaces;
+using ProductDomain.RepositoryInterfaces;
 using HelperUtils;
 
 namespace Application.ProductAL

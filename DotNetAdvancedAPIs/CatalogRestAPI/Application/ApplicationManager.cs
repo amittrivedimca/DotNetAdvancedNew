@@ -1,7 +1,7 @@
 ﻿using Application.CategoryAL;
 using Application.ProductAL;
-using Domain.ExternalServiceInterfaces;
-using Domain.RepositoryInterfaces;
+using ProductDomain.ExternalServiceInterfaces;
+using ProductDomain.RepositoryInterfaces;
 
 namespace Application
 {

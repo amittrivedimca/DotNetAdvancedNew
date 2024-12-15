@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using ProductDomain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +13,6 @@ namespace Application.CartAL
         public IEnumerable<CartItemDTO> GetCartItems(string cartId);
         public CartDTO AddOrUpdateItem(string cartId, CartItemDTO item);
         public bool RemoveItem(string cartId, int itemId);
-        Task<bool> ReceiveAndProcessProductChangeMessages();
+        Task<IEnumerable<string>> ReceiveAndProcessProductChangeMessages();
     }
 }

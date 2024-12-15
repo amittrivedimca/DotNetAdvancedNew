@@ -1,5 +1,5 @@
-﻿using Domain.Entities;
-using Domain.RepositoryInterfaces;
+﻿using ProductDomain.Entities;
+using ProductDomain.RepositoryInterfaces;
 using HelperUtils;
 using Microsoft.EntityFrameworkCore;
 using Persistence.DB;
@@ -72,6 +72,8 @@ namespace Persistence
                 productToUpdate.Name = product.Name;
                 productToUpdate.Image = product.Image;
                 productToUpdate.CategoryId = product.CategoryId;
+                productToUpdate.Price = product.Price;
+                productToUpdate.Amount = product.Amount;
                 await _catalogDB.SaveChangesAsync();
                 return DBOperationStatus.Success;
             }

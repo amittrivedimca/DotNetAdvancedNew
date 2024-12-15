@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Domain.BusinessLogic;
-using Domain.Entities;
-using Domain.ExternalServiceInterfaces;
-using Domain.RepositoryInterfaces;
+using ProductDomain.BusinessLogic;
+using ProductDomain.Entities;
+using ProductDomain.ExternalServiceInterfaces;
+using ProductDomain.RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -101,9 +101,9 @@ namespace Application.CartAL
             return false;
         }
 
-        public async Task<bool> ReceiveAndProcessProductChangeMessages() {
+        public async Task<IEnumerable<string>> ReceiveAndProcessProductChangeMessages() {
             var products = await _messageBroker.ReceiveProductMessageAsync();
-
+            List<string> cartIds = new List<string>();
             if (products.Count > 0)
             {                
                 var carts = _repositoryManager.CartRepository.GetAllCarts();
@@ -112,19 +112,23 @@ namespace Application.CartAL
                 {
                     foreach (var cart in carts)
                     {
-                        var cartItemToUpdate = cart.CartItems.FirstOrDefault(c => c.Name == product.Name);
+                        var cartItemToUpdate = cart.CartItems.FirstOrDefault(c => c.ItemId == product.ItemId);
                         if(cartItemToUpdate != null)
                         {
                             cartItemToUpdate.Name = product.Name;
                             cartItemToUpdate.Price = product.Price;
                             cartItemToUpdate.Quantity = product.Quantity;
                             AddOrUpdateItem(cart.CartId, cartItemToUpdate);
+                            if (!cartIds.Contains(cart.CartId))
+                            {
+                                cartIds.Add(cart.CartId);
+                            }
                         }
                     }
                 }
             }
 
-            return true;
+            return cartIds;
         }
     }
 }

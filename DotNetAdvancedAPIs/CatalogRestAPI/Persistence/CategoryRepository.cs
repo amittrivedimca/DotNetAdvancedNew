@@ -1,5 +1,5 @@
-﻿using Domain.Entities;
-using Domain.RepositoryInterfaces;
+﻿using ProductDomain.Entities;
+using ProductDomain.RepositoryInterfaces;
 using HelperUtils;
 using Microsoft.EntityFrameworkCore;
 using Persistence.DB;

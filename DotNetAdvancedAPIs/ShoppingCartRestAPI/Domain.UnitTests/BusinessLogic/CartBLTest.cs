@@ -1,12 +1,12 @@
-﻿using Domain.BusinessLogic;
-using Domain.Entities;
+﻿using ProductDomain.BusinessLogic;
+using ProductDomain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.UnitTests.BusinessLogic
+namespace ProductDomain.UnitTests.BusinessLogic
 {
     public class CartBLTest
     {

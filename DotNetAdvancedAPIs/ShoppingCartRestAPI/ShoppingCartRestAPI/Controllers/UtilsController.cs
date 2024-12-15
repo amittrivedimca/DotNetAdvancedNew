@@ -1,4 +1,4 @@
-using CartMessageBroker;
+using AzureMessageBroker;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ShoppingCartRestAPI.Controllers

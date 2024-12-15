@@ -1,9 +1,9 @@
 using Application;
-using CatalogMessageBroker;
 using Microsoft.OpenApi.Models;
 using Persistence;
 using Persistence.DB;
 using System.Reflection;
+using AzureMessageBroker;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,10 +42,10 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var services = builder.Services;
-services.AddMessageBrokerServices(builder.Configuration);
+
 services.AddApplicationServices();
 services.AddPersistenceServices(builder.Configuration);
-
+services.AddCatalogMessageBrokerServices(builder.Configuration);
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())

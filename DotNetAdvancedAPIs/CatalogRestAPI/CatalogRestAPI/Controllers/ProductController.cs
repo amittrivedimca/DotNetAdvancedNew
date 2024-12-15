@@ -2,7 +2,7 @@
 using Application.CategoryAL;
 using Application.ProductAL;
 using CatalogRestAPI.ViewModels;
-using Domain.Entities;
+using ProductDomain.Entities;
 using HelperUtils;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;

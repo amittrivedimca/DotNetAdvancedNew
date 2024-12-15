@@ -33,7 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F1D8C477-3F09-4DA2-95AD-52C6BA7C2A40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "CatalogRestAPI\Domain\Domain.csproj", "{8082F9B2-0CEB-4962-81D1-5E372E9B1925}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductDomain", "CatalogRestAPI\Domain\ProductDomain.csproj", "{8082F9B2-0CEB-4962-81D1-5E372E9B1925}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{B63579BE-33E4-4A71-8745-FD14EC0A160D}"
 EndProject
@@ -48,6 +48,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogMessageBroker", "CatalogRestAPI\CatalogMessageBroker\CatalogMessageBroker.csproj", "{49AF2C3B-81DE-4AD5-BCD2-59E988D726F3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CartMessageBroker", "ShoppingCartRestAPI\CartMessageBroker\CartMessageBroker.csproj", "{455DEF4A-C9C2-472C-AF82-4559641EF963}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureMessageBroker", "AzureMessageBroker", "{1993C8CE-48A5-42D4-BE9F-4914277E1D40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureMessageBroker", "MessageBroker\AzureMessageBroker\AzureMessageBroker.csproj", "{F3D35F23-D1E5-4CE4-95A4-AC8CD8509907}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,6 +107,10 @@ Global
 		{455DEF4A-C9C2-472C-AF82-4559641EF963}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{455DEF4A-C9C2-472C-AF82-4559641EF963}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{455DEF4A-C9C2-472C-AF82-4559641EF963}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3D35F23-D1E5-4CE4-95A4-AC8CD8509907}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3D35F23-D1E5-4CE4-95A4-AC8CD8509907}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3D35F23-D1E5-4CE4-95A4-AC8CD8509907}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3D35F23-D1E5-4CE4-95A4-AC8CD8509907}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,5 +137,6 @@ Global
 		{61BBFE9E-3E30-4CC0-8992-1A252BBBD8AE} = {36718098-8E4A-42AF-B706-58A3C0414089}
 		{49AF2C3B-81DE-4AD5-BCD2-59E988D726F3} = {CE1F83DE-8672-45E3-B488-F1E5EE64BAFA}
 		{455DEF4A-C9C2-472C-AF82-4559641EF963} = {596A2A7E-2571-450E-B243-2A523E252639}
+		{F3D35F23-D1E5-4CE4-95A4-AC8CD8509907} = {1993C8CE-48A5-42D4-BE9F-4914277E1D40}
 	EndGlobalSection
 EndGlobal

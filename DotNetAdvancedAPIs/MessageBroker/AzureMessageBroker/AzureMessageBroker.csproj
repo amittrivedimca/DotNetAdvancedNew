@@ -13,7 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Domain\ProductDomain.csproj" />
+    <ProjectReference Include="..\..\CatalogRestAPI\Domain\ProductDomain.csproj" />
+    <ProjectReference Include="..\..\ShoppingCartRestAPI\Domain\Domain.csproj" />
   </ItemGroup>
 
 </Project>
