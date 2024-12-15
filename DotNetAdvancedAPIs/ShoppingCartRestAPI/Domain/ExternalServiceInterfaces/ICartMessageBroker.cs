@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace Domain.ExternalServiceInterfaces
 {
-    public interface IProductMessageBroker
+    public interface ICartMessageBroker
     {
-        Task<bool> SendTestMessageAsync();
-        Task<bool> SendProductChangeMessageAsync(Product Product);
-    }        
-        
+        Task<List<string>> ReceiveTestMessageAsync();
+        Task<List<CartItem>> ReceiveProductMessageAsync();
+    }
 }

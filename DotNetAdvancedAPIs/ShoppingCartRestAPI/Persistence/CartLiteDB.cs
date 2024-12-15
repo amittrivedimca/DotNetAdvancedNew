@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.BusinessLogic;
+using Domain.Entities;
 using LiteDB;
 
 namespace Persistence
@@ -55,5 +56,15 @@ namespace Persistence
                     .FirstOrDefault();
             }
         }
+
+        public IEnumerable<Cart> GetAllCarts()
+        {
+            using (var db = GetDB())
+            {
+                var cartsCollection = GetCartsCollection(db);
+                return cartsCollection.Query().ToList();
+            }
+        }
+
     }
 }

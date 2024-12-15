@@ -11,7 +11,8 @@ namespace Application.CartAL
     {
         public CartDTO GetCart(string cartId);        
         public IEnumerable<CartItemDTO> GetCartItems(string cartId);
-        public CartDTO AddItem(string cartId, CartItemDTO item);
+        public CartDTO AddOrUpdateItem(string cartId, CartItemDTO item);
         public bool RemoveItem(string cartId, int itemId);
+        Task<bool> ReceiveAndProcessProductChangeMessages();
     }
 }

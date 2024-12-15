@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogRestAPI", "CatalogRe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogMessageBroker", "CatalogRestAPI\CatalogMessageBroker\CatalogMessageBroker.csproj", "{49AF2C3B-81DE-4AD5-BCD2-59E988D726F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CartMessageBroker", "ShoppingCartRestAPI\CartMessageBroker\CartMessageBroker.csproj", "{455DEF4A-C9C2-472C-AF82-4559641EF963}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,10 @@ Global
 		{49AF2C3B-81DE-4AD5-BCD2-59E988D726F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49AF2C3B-81DE-4AD5-BCD2-59E988D726F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49AF2C3B-81DE-4AD5-BCD2-59E988D726F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{455DEF4A-C9C2-472C-AF82-4559641EF963}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{455DEF4A-C9C2-472C-AF82-4559641EF963}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{455DEF4A-C9C2-472C-AF82-4559641EF963}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{455DEF4A-C9C2-472C-AF82-4559641EF963}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,5 +128,6 @@ Global
 		{77BBE26C-F929-432E-B318-0C7F746C7467} = {CE1F83DE-8672-45E3-B488-F1E5EE64BAFA}
 		{61BBFE9E-3E30-4CC0-8992-1A252BBBD8AE} = {36718098-8E4A-42AF-B706-58A3C0414089}
 		{49AF2C3B-81DE-4AD5-BCD2-59E988D726F3} = {CE1F83DE-8672-45E3-B488-F1E5EE64BAFA}
+		{455DEF4A-C9C2-472C-AF82-4559641EF963} = {596A2A7E-2571-450E-B243-2A523E252639}
 	EndGlobalSection
 EndGlobal

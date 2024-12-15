@@ -1,6 +1,7 @@
 ﻿using Application;
 using Application.CartAL;
 using Asp.Versioning;
+using Domain.BusinessLogic;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -93,7 +94,7 @@ namespace ShoppingCartRestAPI.Controllers
 
             try
             {
-                var dto = _applicationManager.CartProvider.AddItem(cartId, cartItem);
+                var dto = _applicationManager.CartProvider.AddOrUpdateItem(cartId, cartItem);
                 return Ok(new
                 {
                     cartId = dto.CartId
@@ -125,6 +126,18 @@ namespace ShoppingCartRestAPI.Controllers
             {
                 return BadRequest(ex);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet(Name = "ReceiveAndProcessProductChangeMessages")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult> ReceiveAndProcessProductChangeMessages()
+        {
+            await _applicationManager.CartProvider.ReceiveAndProcessProductChangeMessages();
+            return Ok();
         }
     }
 }

@@ -27,3 +27,5 @@
 /DotNetAdvancedAPIs/.vs/ProjectEvaluation
 /DotNetAdvancedAPIs/CatalogRestAPI/CatalogMessageBroker/bin/Debug/net8.0
 /DotNetAdvancedAPIs/CatalogRestAPI/CatalogMessageBroker/obj
+/DotNetAdvancedAPIs/ShoppingCartRestAPI/CartMessageBroker/bin/Debug/net8.0
+/DotNetAdvancedAPIs/ShoppingCartRestAPI/CartMessageBroker/obj

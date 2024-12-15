@@ -1,5 +1,6 @@
 ﻿using Application.CartAL;
 using AutoMapper;
+using Domain.ExternalServiceInterfaces;
 using Domain.RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,9 @@ namespace Application
     {
         private readonly Lazy<ICartProvider> _lazyCartProvider;
 
-        public ApplicationManager(IMapper mapper, IRepositoryManager repositoryManager)
+        public ApplicationManager(IMapper mapper, IRepositoryManager repositoryManager,ICartMessageBroker messageBroker)
         {
-            _lazyCartProvider = new Lazy<ICartProvider>(() => new CartProvider(mapper, repositoryManager));
+            _lazyCartProvider = new Lazy<ICartProvider>(() => new CartProvider(mapper, repositoryManager, messageBroker));
         }
 
         public ICartProvider CartProvider

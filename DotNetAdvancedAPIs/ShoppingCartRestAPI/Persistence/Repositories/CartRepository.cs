@@ -27,6 +27,11 @@ namespace Persistence.Repositories
             return cartDB.UpdateCart(cart);
         }
 
+        public IEnumerable<Cart> GetAllCarts()
+        {
+            return cartDB.GetAllCarts();
+        }
+
         //public bool AddItem(string cartId, CartItem item)
         //{
         //    Cart cart = cartDB.GetCart(cartId);

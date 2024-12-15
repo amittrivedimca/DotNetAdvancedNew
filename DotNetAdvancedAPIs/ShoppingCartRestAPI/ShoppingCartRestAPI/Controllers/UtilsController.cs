@@ -1,12 +1,12 @@
-using CatalogMessageBroker;
+using CartMessageBroker;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CatalogRestAPI.Controllers
+namespace ShoppingCartRestAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class UtilsController : ControllerBase
-    {        
+    {
 
         private readonly ILogger<UtilsController> _logger;
 
@@ -15,12 +15,13 @@ namespace CatalogRestAPI.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "SendBrokerMessage")]
+        [HttpGet(Name = "ReceiveBrokerMessage")]
         public async Task<IActionResult> Get()
         {
-            AzureServiceBusProducer azureService = new AzureServiceBusProducer();
-            await azureService.SendTestMessageAsync();
+            AzureServiceBusReceiver azureService = new AzureServiceBusReceiver();
+            await azureService.ReceiveTestMessageAsync();
             return Ok();
         }
+       
     }
 }

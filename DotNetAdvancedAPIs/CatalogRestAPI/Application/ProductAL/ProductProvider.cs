@@ -1,5 +1,6 @@
 ﻿using Domain.BusinessLogic;
 using Domain.Entities;
+using Domain.ExternalServiceInterfaces;
 using Domain.RepositoryInterfaces;
 using HelperUtils;
 
@@ -9,11 +10,13 @@ namespace Application.ProductAL
     {
         private readonly IMapper _mapper;
         private IProductRepository _productRepository;
+        private readonly IProductMessageBroker _messageBroker;
 
-        public ProductProvider(IMapper mapper, IRepositoryManager repositoryManager)
+        public ProductProvider(IMapper mapper, IRepositoryManager repositoryManager, IProductMessageBroker messageBroker)
         {
             _mapper = mapper;
             _productRepository = repositoryManager.ProductRepository;
+            _messageBroker = messageBroker;
         }
 
         public async Task<DBOperationStatus> AddAsync(ProductDTO productDTO)
@@ -61,7 +64,7 @@ namespace Application.ProductAL
 
         private void ProductBL_OnProductUpdated(ProductBL sender, Product product)
         {
-            throw new NotImplementedException();
+            _messageBroker.SendProductChangeMessageAsync(product);
         }
 
         private void ProductBL_OnProductUpdateFailed(ProductBL sender, Product product)
