@@ -9,8 +9,8 @@ namespace Application.CartAL
 {
     public interface ICartProvider
     {
-        public CartDTO GetCart(string cartId);        
-        public IEnumerable<CartItemDTO> GetCartItems(string cartId);
+        Task<CartDTO> GetCart(string cartId);        
+        Task<IEnumerable<CartItemDTO>> GetCartItems(string cartId);
         public CartDTO AddOrUpdateItem(string cartId, CartItemDTO item);
         public bool RemoveItem(string cartId, int itemId);
         Task<IEnumerable<string>> ReceiveAndProcessProductChangeMessages();

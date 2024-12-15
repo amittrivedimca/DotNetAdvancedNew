@@ -1,4 +1,5 @@
 ﻿using Azure.Messaging.ServiceBus;
+using Azure.Messaging.ServiceBus.Administration;
 using ProductDomain.Entities;
 using ProductDomain.ExternalServiceInterfaces;
 using System.Text.Json;
@@ -32,12 +33,28 @@ namespace AzureMessageBroker
 
         private async Task<List<string>> ReceiveMessageAsync()
         {
-            ServiceBusClient client = new ServiceBusClient(connStr);
-            ServiceBusReceiver receiver = client.CreateReceiver(QueueName);
+           
             List<string> messages = new List<string>();
-            try
+
+            if (!await IsAnyActiveMessages())
             {
-                var receivedMessages = await receiver.ReceiveMessagesAsync(50, new TimeSpan(0, 1, 0));
+                return messages;
+            }
+
+            ServiceBusClientOptions clientOptions = new ServiceBusClientOptions();
+            clientOptions.RetryOptions = new ServiceBusRetryOptions()
+            {
+                Delay = TimeSpan.FromSeconds(0.8),
+                MaxDelay = TimeSpan.FromSeconds(10),
+                MaxRetries = 3,
+            };
+
+            ServiceBusClient client = new ServiceBusClient(connStr, clientOptions);            
+            ServiceBusReceiver receiver = client.CreateReceiver(QueueName);            
+            
+            try
+            {                
+                var receivedMessages = await receiver.ReceiveMessagesAsync(5, new TimeSpan(0, 0, 10));                
                 var count = receivedMessages.Count();
                 foreach (var message in receivedMessages)
                 {
@@ -58,6 +75,14 @@ namespace AzureMessageBroker
                 await client.DisposeAsync();
             }
             return messages;
+        }
+
+        private async Task<bool> IsAnyActiveMessages()
+        {
+            ServiceBusAdministrationClient administrationClient = new ServiceBusAdministrationClient(connStr);
+            var queueInfo = await administrationClient.GetQueueRuntimePropertiesAsync(QueueName);
+            var activeMessages = queueInfo.Value.ActiveMessageCount;
+            return activeMessages > 0;
         }
     }
 }

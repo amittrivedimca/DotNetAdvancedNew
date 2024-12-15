@@ -3,11 +3,6 @@ using ProductDomain.BusinessLogic;
 using ProductDomain.Entities;
 using ProductDomain.ExternalServiceInterfaces;
 using ProductDomain.RepositoryInterfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.CartAL
 {
@@ -47,7 +42,7 @@ namespace Application.CartAL
                 cartBL = new CartBL();
             }
 
-            cartBL.AddItem(cartItem);
+            cartBL.AddOrUpdateItem(cartItem);
 
             try
             {
@@ -67,8 +62,9 @@ namespace Application.CartAL
             return cartBL.Cart;
         }
 
-        public CartDTO GetCart(string cartId)
+        public async Task<CartDTO> GetCart(string cartId)
         {
+            await ReceiveAndProcessProductChangeMessages();
             var cart = _repositoryManager.CartRepository.GetCart(cartId);
             if (cart != null)
             {
@@ -77,8 +73,9 @@ namespace Application.CartAL
             return null;
         }
 
-        public IEnumerable<CartItemDTO> GetCartItems(string cartId)
+        public async Task<IEnumerable<CartItemDTO>> GetCartItems(string cartId)
         {
+            await ReceiveAndProcessProductChangeMessages();
             var cart = _repositoryManager.CartRepository.GetCart(cartId);
             if (cart != null && cart.CartItems != null)
             {
@@ -114,7 +111,7 @@ namespace Application.CartAL
                     {
                         var cartItemToUpdate = cart.CartItems.FirstOrDefault(c => c.ItemId == product.ItemId);
                         if(cartItemToUpdate != null)
-                        {
+                        {                            
                             cartItemToUpdate.Name = product.Name;
                             cartItemToUpdate.Price = product.Price;
                             cartItemToUpdate.Quantity = product.Quantity;

@@ -37,7 +37,7 @@ namespace ProductDomain.UnitTests.BusinessLogic
         public void ShouldAddNewItem()
         {            
             var cartBL = new CartBL();
-            cartBL.AddItem(new CartItem() { ItemId = 1, Name = "item1" });
+            cartBL.AddOrUpdateItem(new CartItem() { ItemId = 1, Name = "item1" });
             Assert.IsTrue(cartBL.Cart.CartItems.Count > 0);
         }
 

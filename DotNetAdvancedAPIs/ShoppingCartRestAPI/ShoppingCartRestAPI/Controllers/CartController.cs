@@ -26,9 +26,9 @@ namespace ShoppingCartRestAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ApiVersion("1.0")]
-        public ActionResult<CartDTO> GetCartInfo([FromRoute]string cartId)
+        public async Task<ActionResult<CartDTO>> GetCartInfo([FromRoute]string cartId)
         {
-            var cart = _applicationManager.CartProvider.GetCart(cartId);
+            var cart = await _applicationManager.CartProvider.GetCart(cartId);
             if (cart != null)
             {
                 return Ok(cart);
@@ -45,9 +45,9 @@ namespace ShoppingCartRestAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ApiVersion("2.0")]
-        public ActionResult<CartDTO> GetCartItemsInfo([FromRoute] string cartId)
+        public async Task<ActionResult<CartDTO>> GetCartItemsInfo([FromRoute] string cartId)
         {
-            var cart = _applicationManager.CartProvider.GetCart(cartId);
+            var cart = await _applicationManager.CartProvider.GetCart(cartId);
             if (cart != null)
             {
                 return Ok(cart.CartItems);
@@ -63,9 +63,9 @@ namespace ShoppingCartRestAPI.Controllers
         [HttpGet("GetCartItems/{cartId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<List<CartItemDTO>> GetCartItems([FromRoute]string cartId)
+        public async Task<ActionResult<List<CartItemDTO>>> GetCartItems([FromRoute]string cartId)
         {
-            var items = _applicationManager.CartProvider.GetCartItems(cartId);
+            var items = await _applicationManager.CartProvider.GetCartItems(cartId);
             if (items != null)
             {
                 return Ok(items);

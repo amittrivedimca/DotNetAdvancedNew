@@ -29,9 +29,19 @@ namespace ProductDomain.BusinessLogic
             Cart.CartId = GenerateCartId();            
         }
 
-        public void AddItem(CartItem cartItem)
+        public void AddOrUpdateItem(CartItem cartItem)
         {
-            Cart.CartItems.Add(cartItem);
+            var existingCartItem = Cart.CartItems.FirstOrDefault(c => c.ItemId == cartItem.ItemId);
+            if (existingCartItem != null)
+            {
+                existingCartItem.Name = cartItem.Name;
+                existingCartItem.Price = cartItem.Price;
+                existingCartItem.Quantity = cartItem.Quantity;
+            }
+            else
+            {
+                Cart.CartItems.Add(cartItem);
+            }
         }
 
         public bool RemoveItem(int itemId)
