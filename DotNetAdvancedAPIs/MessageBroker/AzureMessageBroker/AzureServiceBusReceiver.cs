@@ -36,12 +36,13 @@ namespace AzureMessageBroker
            
             List<string> messages = new List<string>();
 
-            if (!await IsAnyActiveMessages())
+            if (!await IsAnyActiveMessage())
             {
                 return messages;
             }
 
             ServiceBusClientOptions clientOptions = new ServiceBusClientOptions();
+            clientOptions.TransportType = ServiceBusTransportType.AmqpWebSockets;
             clientOptions.RetryOptions = new ServiceBusRetryOptions()
             {
                 Delay = TimeSpan.FromSeconds(0.8),
@@ -49,12 +50,24 @@ namespace AzureMessageBroker
                 MaxRetries = 3,
             };
 
-            ServiceBusClient client = new ServiceBusClient(connStr, clientOptions);            
+            ServiceBusClient client = new ServiceBusClient(connStr, clientOptions);
+
+            // create a processor that we can use to process the messages
+            //ServiceBusProcessor processor = client.CreateProcessor(QueueName, new ServiceBusProcessorOptions());
+
             ServiceBusReceiver receiver = client.CreateReceiver(QueueName);            
             
             try
-            {                
-                var receivedMessages = await receiver.ReceiveMessagesAsync(5, new TimeSpan(0, 0, 10));                
+            {
+
+                //// add handler to process messages
+                //processor.ProcessMessageAsync += Processor_ProcessMessageAsync;
+                //// add handler to process any errors
+                //processor.ProcessErrorAsync += Processor_ProcessErrorAsync;
+                //// start processing 
+                //await processor.StartProcessingAsync();
+
+                var receivedMessages = await receiver.ReceiveMessagesAsync(5, new TimeSpan(0, 0, 10));
                 var count = receivedMessages.Count();
                 foreach (var message in receivedMessages)
                 {
@@ -72,12 +85,25 @@ namespace AzureMessageBroker
             {
                 await receiver.CloseAsync();
                 await receiver.DisposeAsync();
+                //await processor.DisposeAsync();
                 await client.DisposeAsync();
             }
             return messages;
         }
 
-        private async Task<bool> IsAnyActiveMessages()
+        //private Task Processor_ProcessErrorAsync(ProcessErrorEventArgs args)
+        //{
+        //    return Task.CompletedTask;
+        //}
+
+        //private async Task Processor_ProcessMessageAsync(ProcessMessageEventArgs args)
+        //{
+        //    string body = args.Message.Body.ToString();
+        //    // complete the message. message is deleted from the queue. 
+        //    await args.CompleteMessageAsync(args.Message); 
+        //}
+
+        private async Task<bool> IsAnyActiveMessage()
         {
             ServiceBusAdministrationClient administrationClient = new ServiceBusAdministrationClient(connStr);
             var queueInfo = await administrationClient.GetQueueRuntimePropertiesAsync(QueueName);
