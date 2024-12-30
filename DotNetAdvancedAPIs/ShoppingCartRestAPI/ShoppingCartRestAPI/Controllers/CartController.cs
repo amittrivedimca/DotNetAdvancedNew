@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ShoppingCartRestAPI.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     [ApiVersion("1.0")]
     [ApiVersion("2.0")]
@@ -81,7 +81,7 @@ namespace ShoppingCartRestAPI.Controllers
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status200OK)]        
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpPost("AddCartItem/{cartId}")]
+        [HttpPost("AddCartItem/{cartId}")]        
         public ActionResult AddCartItem([FromRoute]string cartId,CartItemDTO cartItem)
         {
             if(!ModelState.IsValid)
@@ -111,7 +111,7 @@ namespace ShoppingCartRestAPI.Controllers
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status200OK)]        
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpDelete(Name = "RemoveCartItem")]
+        [HttpDelete("RemoveCartItem")]
         public ActionResult RemoveCartItem([FromQuery] string cartId, [FromQuery] int itemId)
         {
             try
@@ -129,7 +129,7 @@ namespace ShoppingCartRestAPI.Controllers
         /// Receive And Process ProductChange Messages to update cart
         /// </summary>
         /// <returns></returns>
-        [HttpGet(Name = "ReceiveAndProcessProductChangeMessages")]
+        [HttpGet("ReceiveAndProcessProductChangeMessages")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> ReceiveAndProcessProductChangeMessages()

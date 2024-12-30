@@ -15,7 +15,7 @@ namespace ShoppingCartRestAPI.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "ReceiveBrokerMessage")]
+        [HttpGet("ReceiveBrokerMessage")]
         public async Task<IActionResult> Get()
         {
             AzureServiceBusReceiver azureService = new AzureServiceBusReceiver();

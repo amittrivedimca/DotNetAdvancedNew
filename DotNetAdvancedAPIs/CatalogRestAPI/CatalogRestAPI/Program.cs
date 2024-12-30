@@ -21,7 +21,7 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "ToDo API",
+        Title = "Calalog API",
         Description = "An ASP.NET Core Web API for managing Calalog items",
         TermsOfService = new Uri("https://example.com/terms"),
         Contact = new OpenApiContact
