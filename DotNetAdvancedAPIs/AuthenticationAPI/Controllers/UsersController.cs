@@ -2,6 +2,9 @@
 using AuthenticationAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.JsonWebTokens;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 
 namespace AuthenticationAPI.Controllers
 {
@@ -30,7 +33,28 @@ namespace AuthenticationAPI.Controllers
             var userName = userLogin.GetLoggedInUser(_contextAccessor.HttpContext);
             return Ok(new { userName = userName });
         }
-    
+
+        [HttpPost]
+        public async Task<ActionResult> JWT(UserLoginModel loginModel)
+        {
+            var result = await this.userLogin.GetJWT(loginModel, _contextAccessor.HttpContext);
+            return Ok(new
+            {
+                IsSuccess = result.Item1,
+                Token = result.Item2
+            });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> VerifyJWT(string token)
+        {
+            var result = await userLogin.VerifyJWT(token);
+            return Ok(new
+            {
+                IsValid = result.IsValid,
+                Message = result.Exception?.Message
+            });
+        }
     }
 
 
