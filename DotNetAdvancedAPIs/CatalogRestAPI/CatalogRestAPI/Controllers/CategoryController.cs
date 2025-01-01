@@ -1,5 +1,6 @@
 ﻿using Application;
 using Application.CategoryAL;
+using CatalogRestAPI.Classes;
 using HelperUtils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -16,9 +17,11 @@ namespace CatalogRestAPI.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly IApplicationManager _appManager;
-        public CategoryController(IApplicationManager applicationManager)
+        private readonly UserService _userService;
+        public CategoryController(IApplicationManager applicationManager, UserService userService)
         {
             _appManager = applicationManager;
+            _userService = userService;
         }
 
         /// <summary>
@@ -26,7 +29,7 @@ namespace CatalogRestAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet(Name = "GetAll")]
-        [Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = "MyAuth")]
         public ActionResult<IEnumerable<CategoryDTO>> GetAll()
         {
             return Ok(_appManager.CategoryProvider.GetAll());
@@ -44,7 +47,7 @@ namespace CatalogRestAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="404">Category not found</response>
         [HttpGet(Name = "GetById")]
-        [Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = "MyAuth")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<CategoryDTO>> GetById(int id)
@@ -65,9 +68,10 @@ namespace CatalogRestAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="400">Internal Error</response>
         [HttpPost(Name = "AddAsync")]
-        [Authorize(Roles = "Manager", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Roles = "Manager", AuthenticationSchemes = "MyAuth")]
         [ProducesResponseType(StatusCodes.Status200OK)]        
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> AddAsync(CategoryDTO category)
         {
             try
@@ -94,7 +98,7 @@ namespace CatalogRestAPI.Controllers
         /// <response code="404">Category not found</response>
         /// <response code="400">Internal Error</response>
         [HttpPut(Name = "UpdateAsync")]
-        [Authorize(Roles = "Manager", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Roles = "Manager", AuthenticationSchemes = "MyAuth")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -116,7 +120,7 @@ namespace CatalogRestAPI.Controllers
         }
 
         [HttpDelete(Name = "DeleteAsync")]
-        [Authorize(Roles = "Manager", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Roles = "Manager", AuthenticationSchemes = "MyAuth")]
         public async Task<ActionResult<string>> DeleteAsync(int id)
         {
             try

@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-string authScheme = JwtBearerDefaults.AuthenticationScheme; //"MyAuth";
+string authScheme = "MyAuth";
 builder.Services.AddControllers()
     .AddJsonOptions(opt => {
         opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
