@@ -88,16 +88,17 @@ namespace AuthenticationAPI.Classes
             return (false, "Invalid username or password");
         }
 
-        public string GetLoggedInUser(HttpContext ctx)
+        public (string userName, ClaimsPrincipal user) GetLoggedInUser(HttpContext ctx)
         {
             if (ctx.User.Identity.IsAuthenticated)
             {
-                return ctx.User.Claims.First(c => c.Type == ClaimTypes.Name).Value;
+                string name = ctx.User.Claims.First(c => c.Type == ClaimTypes.Name).Value;
+                return (name, ctx.User);
             }
-            return "User is not logged in !!";
+            return ("User is not logged in !!", null);
         }
 
-        public async Task<(bool, string)> GetJWT(UserLoginModel userLogin, HttpContext ctx)
+        public async Task<(bool isSuccess, string accessToken)> GetJWT(UserLoginModel userLogin, HttpContext ctx)
         {
             var handler = new JsonWebTokenHandler();
 
@@ -117,7 +118,7 @@ namespace AuthenticationAPI.Classes
                 {
                     Issuer = "TestIssuer",
                     IssuedAt = DateTime.UtcNow,
-                    Expires = DateTime.UtcNow.AddMinutes(2),
+                    Expires = DateTime.UtcNow.AddMinutes(5),
                     Subject = identity,
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)), SecurityAlgorithms.HmacSha256Signature)
                 };
@@ -132,11 +133,24 @@ namespace AuthenticationAPI.Classes
             return (false, "Invalid username or password");
         }
 
-        public async Task<TokenValidationResult> VerifyJWT(string token)
+        public async Task<UserInfoModel> VerifyJWT(string token)
         {
             JsonWebTokenHandler tokenHandler = new JsonWebTokenHandler();            
             TokenValidationResult validationResult = await tokenHandler.ValidateTokenAsync(token, TokenValidationParams);
-            return validationResult;            
+            UserInfoModel userInfo = new UserInfoModel() { 
+             IsAuthenticated = validationResult.IsValid,
+              ErrorMessage = validationResult.Exception?.Message
+            };
+            
+            if(validationResult.IsValid)
+            {
+                string userName = validationResult.ClaimsIdentity.Claims.First(c => c.Type == ClaimTypes.Name).Value;
+                AppUser appUser = UserLogins.First(u => u.UserName == userName);
+                userInfo.UserName = appUser.UserName;
+                userInfo.Role = appUser.Role;                
+            }
+            
+            return userInfo;   
         }
     }
 }

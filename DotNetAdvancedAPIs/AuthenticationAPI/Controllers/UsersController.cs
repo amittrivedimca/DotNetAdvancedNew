@@ -20,40 +20,50 @@ namespace AuthenticationAPI.Controllers
             _contextAccessor = contextAccessor;
         }
 
-        [HttpPost]
-        public async Task<ActionResult> DoCookieLogin(UserLoginModel userLogin)
-        {
-            var result = await this.userLogin.DoCookieLogin(userLogin, _contextAccessor.HttpContext);                        
-            return Ok(result.Item2);            
-        }
+        //[HttpPost]
+        //public async Task<ActionResult> DoCookieLogin(UserLoginModel userLogin)
+        //{
+        //    var result = await this.userLogin.DoCookieLogin(userLogin, _contextAccessor.HttpContext);                        
+        //    return Ok(result.Item2);            
+        //}
 
-        [HttpGet]
-        public ActionResult GetLoggedInUser()
-        {
-            var userName = userLogin.GetLoggedInUser(_contextAccessor.HttpContext);
-            return Ok(new { userName = userName });
-        }
+        //[HttpGet]
+        //public ActionResult GetCookieLoggedInUser()
+        //{
+        //    var userInfo = userLogin.GetLoggedInUser(_contextAccessor.HttpContext);
+        //    return Ok(new
+        //    {
+        //        userName = userInfo.userName,
+        //        user = userInfo.user
+        //    });
+        //}
 
+        /// <summary>
+        /// Generate JWT
+        /// </summary>
+        /// <param name="loginModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> JWT(UserLoginModel loginModel)
         {
             var result = await this.userLogin.GetJWT(loginModel, _contextAccessor.HttpContext);
             return Ok(new
             {
-                IsSuccess = result.Item1,
-                Token = result.Item2
+                IsSuccess = result.isSuccess,
+                AccessToken = result.accessToken
             });
         }
 
-        [HttpPost]
-        public async Task<ActionResult> VerifyJWT(string token)
+        /// <summary>
+        /// Verify JWT and return user role with permissions if token is valid
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns>User role and permissions if token is valid</returns>
+        [HttpPost]        
+        public async Task<ActionResult<UserInfoModel>> VerifyJWT(string token)
         {
-            var result = await userLogin.VerifyJWT(token);
-            return Ok(new
-            {
-                IsValid = result.IsValid,
-                Message = result.Exception?.Message
-            });
+            UserInfoModel result = await userLogin.VerifyJWT(token);            
+            return Ok(result);
         }
     }
 

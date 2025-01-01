@@ -7,6 +7,8 @@ using HelperUtils;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace CatalogRestAPI.Controllers
 {
@@ -23,6 +25,7 @@ namespace CatalogRestAPI.Controllers
 
 
         [HttpGet("{categoryID}/{pageNumber?}/{pageSize?}")]
+        [Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<ApiResponse<PagedList<ProductShortInfoDTO>>>> GetAll([FromRoute]int categoryID, 
             [FromRoute] int pageNumber=0, [FromRoute] int pageSize=0)
@@ -54,6 +57,7 @@ namespace CatalogRestAPI.Controllers
         }
 
         [HttpGet()]
+        [Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ApiResponse<ProductDTO>>> GetById(int id)
@@ -97,9 +101,12 @@ namespace CatalogRestAPI.Controllers
             return Ok(apiResponse);
         }
 
+
         [HttpPost()]
+        [Authorize(Roles = "Manager", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<string>> Add(ProductDTO product)
         {
             try
@@ -118,9 +125,11 @@ namespace CatalogRestAPI.Controllers
         }
 
         [HttpPut()]
+        [Authorize(Roles = "Manager", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<string>> Update(ProductDTO product)
         {
             try
@@ -139,9 +148,11 @@ namespace CatalogRestAPI.Controllers
         }
 
         [HttpDelete()]
+        [Authorize(Roles = "Manager", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<string>> Delete(int id)
         {
             try
