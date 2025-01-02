@@ -9,11 +9,11 @@ namespace AuthenticationAPI.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        UserLogin userLogin;
+        UserLogin _userLogin;
         IHttpContextAccessor _contextAccessor;
-        public UsersController(ILogger<UsersController> logger, IHttpContextAccessor contextAccessor)
+        public UsersController(UserLogin userLogin,ILogger<UsersController> logger, IHttpContextAccessor contextAccessor)
         {
-            userLogin = new UserLogin();
+            _userLogin = userLogin;
             _contextAccessor = contextAccessor;
         }
 
@@ -43,11 +43,12 @@ namespace AuthenticationAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> JWT(UserLoginModel loginModel)
         {
-            var result = await this.userLogin.GetJWT(loginModel, _contextAccessor.HttpContext);
+            var result = await this._userLogin.GetJWT(loginModel, _contextAccessor.HttpContext);
             return Ok(new
             {
                 IsSuccess = result.isSuccess,
-                AccessToken = result.accessToken
+                AccessToken = result.accessToken,
+                RefreshToken = result.refreshToken.Token
             });
         }
 
@@ -56,11 +57,23 @@ namespace AuthenticationAPI.Controllers
         /// </summary>
         /// <param name="token"></param>
         /// <returns>User role and permissions if token is valid</returns>
-        [HttpPost]        
+        [HttpPost]
         public async Task<ActionResult<UserInfoModel>> VerifyJWT(string token)
         {
-            UserInfoModel result = await userLogin.VerifyJWT(token);            
+            UserInfoModel result = await _userLogin.VerifyJWT(token);
             return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<NewAccessTokenModel>> GetNewAccessToken(string refreshToken)
+        {
+            var result = await this._userLogin.GetNewAccessToken(refreshToken);
+            NewAccessTokenModel res = new NewAccessTokenModel() {            
+                IsSuccess = result.isSuccess,
+                NewAccessToken = result.accessToken,
+                RefreshToken = result.refreshToken            
+            };
+            return Ok(res);
         }
     }
 

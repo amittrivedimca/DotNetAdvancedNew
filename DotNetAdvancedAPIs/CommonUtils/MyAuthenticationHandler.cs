@@ -79,13 +79,30 @@ namespace CommonUtils
                 var ticket = new AuthenticationTicket(principal, this.Scheme.Name);
                 return (true, ticket);
             }
-            else
+            //else if(userInfo.IsTokenExpired)
+            //{
+            //    return await GetNewAccessToken(userInfo.RefreshToken);
+            //}
+            else 
             {
                 _userService.CurrentUser = null;
                 return (false, null);
             }
         }
-       
-        
+
+        private async Task<(bool isValid, AuthenticationTicket ticket)> GetNewAccessToken(string refreshToken)
+        {
+            string url = MyAuthUrl + "/GetNewAccessToken?refreshToken=" + refreshToken;
+            var request = new HttpRequestMessage(HttpMethod.Post, url); // Prepare the HTTP request.                                                                       
+            var response = await httpClient.SendAsync(request); // Send the request.
+            string jsonString = await response.Content.ReadAsStringAsync();
+            NewAccessTokenModel newAccessTokenModel = JsonSerializer.Deserialize<NewAccessTokenModel>(jsonString);
+            if (newAccessTokenModel.IsSuccess)
+            {
+                return await VerifyToken(newAccessTokenModel.NewAccessToken);
+            }
+
+            return (false, null);
+        }
     }
 }

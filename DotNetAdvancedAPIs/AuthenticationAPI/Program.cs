@@ -95,6 +95,9 @@ services.AddAuthorization(builder => {
     });
 });
 
+services.AddScoped<UserLogin>();
+services.AddSingleton<LoggedInUsersCollection>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
