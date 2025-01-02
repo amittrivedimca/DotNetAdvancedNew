@@ -1,11 +1,11 @@
 using Application;
+using AzureMessageBroker;
+using CommonUtils;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Persistence;
 using Persistence.DB;
 using System.Reflection;
-using AzureMessageBroker;
-using CatalogRestAPI.Classes;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 

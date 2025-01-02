@@ -2,8 +2,8 @@
 
 namespace CatalogRestAPI.Classes
 {
-    public class UserService
-    {
-        public UserInfoModel CurrentUser { get; set; }
-    }
+    //public class UserService
+    //{
+    //    public UserInfoModel CurrentUser { get; set; }
+    //}
 }

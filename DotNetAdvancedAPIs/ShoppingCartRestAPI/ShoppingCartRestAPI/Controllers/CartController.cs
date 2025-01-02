@@ -1,6 +1,7 @@
 ﻿using Application;
 using Application.CartAL;
 using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ShoppingCartRestAPI.Controllers
@@ -26,6 +27,7 @@ namespace ShoppingCartRestAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ApiVersion("1.0")]
+        [Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = "MyAuth")]
         public async Task<ActionResult<CartDTO>> GetCartInfo([FromRoute]string cartId)
         {
             var cart = await _applicationManager.CartProvider.GetCart(cartId);
@@ -45,6 +47,7 @@ namespace ShoppingCartRestAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ApiVersion("2.0")]
+        [Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = "MyAuth")]
         public async Task<ActionResult<CartDTO>> GetCartItemsInfo([FromRoute] string cartId)
         {
             var cart = await _applicationManager.CartProvider.GetCart(cartId);
@@ -63,6 +66,7 @@ namespace ShoppingCartRestAPI.Controllers
         [HttpGet("GetCartItems/{cartId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = "MyAuth")]
         public async Task<ActionResult<List<CartItemDTO>>> GetCartItems([FromRoute]string cartId)
         {
             var items = await _applicationManager.CartProvider.GetCartItems(cartId);
@@ -81,7 +85,8 @@ namespace ShoppingCartRestAPI.Controllers
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status200OK)]        
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpPost("AddCartItem/{cartId}")]        
+        [HttpPost("AddCartItem/{cartId}")]
+        [Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = "MyAuth")]
         public ActionResult AddCartItem([FromRoute]string cartId,CartItemDTO cartItem)
         {
             if(!ModelState.IsValid)
@@ -112,6 +117,7 @@ namespace ShoppingCartRestAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]        
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpDelete("RemoveCartItem")]
+        [Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = "MyAuth")]
         public ActionResult RemoveCartItem([FromQuery] string cartId, [FromQuery] int itemId)
         {
             try
@@ -132,6 +138,7 @@ namespace ShoppingCartRestAPI.Controllers
         [HttpGet("ReceiveAndProcessProductChangeMessages")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = "MyAuth")]
         public async Task<ActionResult> ReceiveAndProcessProductChangeMessages()
         {
             try

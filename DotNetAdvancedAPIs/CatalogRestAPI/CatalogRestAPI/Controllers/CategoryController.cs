@@ -1,8 +1,7 @@
 ﻿using Application;
 using Application.CategoryAL;
-using CatalogRestAPI.Classes;
+using CommonUtils;
 using HelperUtils;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

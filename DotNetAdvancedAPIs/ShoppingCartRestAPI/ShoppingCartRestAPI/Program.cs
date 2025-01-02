@@ -5,11 +5,13 @@ using Microsoft.OpenApi.Models;
 using Persistence;
 using System.Reflection;
 using AzureMessageBroker;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using CommonUtils;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+string authScheme = "MyAuth";
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -60,6 +62,29 @@ builder.Services.AddSwaggerGen(options =>
         return apiDescriptions.First();
     });
 
+    var jwtSecurityScheme = new OpenApiSecurityScheme
+    {
+        BearerFormat = "JWT",
+        Name = "JWT Authentication",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Scheme = JwtBearerDefaults.AuthenticationScheme,
+        Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
+
+        Reference = new OpenApiReference
+        {
+            Id = JwtBearerDefaults.AuthenticationScheme,
+            Type = ReferenceType.SecurityScheme
+        }
+    };
+
+    options.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { jwtSecurityScheme, Array.Empty<string>() }
+    });
+
     //// using System.Reflection;
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
@@ -83,11 +108,21 @@ services.AddApiVersioning(o => {
 });
 
 
+services.AddAuthentication().AddScheme<MyAuthenticationOptions, MyAuthenticationHandler>(authScheme, opt => { });
+
+services.AddAuthorization(builder =>
+{
+    builder.AddPolicy("auth-policy", p =>
+    {
+        p.RequireAuthenticatedUser();
+        p.AddAuthenticationSchemes(authScheme);
+    });
+});
 
 services.AddApplicationServices();
 services.AddPersistenceServices(builder.Configuration);
 services.AddCartMessageBrokerServices(builder.Configuration);
-
+services.AddScoped<UserService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
