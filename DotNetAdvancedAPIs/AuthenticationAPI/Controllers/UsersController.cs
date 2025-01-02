@@ -1,10 +1,7 @@
 ﻿using AuthenticationAPI.Classes;
 using AuthenticationAPI.Models;
-using Microsoft.AspNetCore.Http;
+using CommonUtils;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.JsonWebTokens;
-using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
 
 namespace AuthenticationAPI.Controllers
 {

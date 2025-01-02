@@ -1,4 +1,6 @@
-﻿namespace AuthenticationAPI.Classes
+﻿using CommonUtils;
+
+namespace AuthenticationAPI.Classes
 {
     public class AppUser
     {

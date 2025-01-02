@@ -1,4 +1,4 @@
-﻿using CatalogRestAPI.ViewModels;
+﻿using CommonUtils;
 
 namespace CatalogRestAPI.Classes
 {

@@ -1,13 +1,11 @@
 ﻿using AuthenticationAPI.Models;
+using CommonUtils;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Security.Principal;
 using System.Text;
 
 namespace AuthenticationAPI.Classes

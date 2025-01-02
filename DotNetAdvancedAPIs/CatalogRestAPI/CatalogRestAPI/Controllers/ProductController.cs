@@ -1,14 +1,9 @@
 ﻿using Application;
-using Application.CategoryAL;
 using Application.ProductAL;
 using CatalogRestAPI.ViewModels;
-using ProductDomain.Entities;
 using HelperUtils;
-using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CatalogRestAPI.Controllers
 {
