@@ -162,11 +162,14 @@ namespace AuthenticationAPI.Classes
             if (isTokenExpired || validationResult.IsValid)
             {
                 var loggedInUser = _loggedInUsers.FindByJWT(token);
-                string userName = loggedInUser.UserName; //validationResult.ClaimsIdentity.Claims.First(c => c.Type == ClaimTypes.Name).Value;
-                AppUser appUser = UserLoginDB.First(u => u.UserName == userName);                
-                userInfo.UserName = appUser.UserName;
-                userInfo.Role = appUser.Role;                
-                userInfo.RefreshToken = loggedInUser.RefreshToken.Token;
+                if (loggedInUser != null)
+                {
+                    string userName = loggedInUser.UserName; //validationResult.ClaimsIdentity.Claims.First(c => c.Type == ClaimTypes.Name).Value;
+                    AppUser appUser = UserLoginDB.First(u => u.UserName == userName);
+                    userInfo.UserName = appUser.UserName;
+                    userInfo.Role = appUser.Role;
+                    userInfo.RefreshToken = loggedInUser.RefreshToken.Token;
+                }
             }            
 
             return userInfo;   
@@ -179,37 +182,65 @@ namespace AuthenticationAPI.Classes
             return validationResult;
         }
 
-        public async Task<(bool isSuccess, string accessToken, string refreshToken)> GetNewAccessToken(string refreshToken)
+        public async Task<NewAccessTokenModel> GetNewAccessToken(string refreshToken)
         {
+
             var loggedInUser = _loggedInUsers.FindByRefreshToken(refreshToken);
 
             if (loggedInUser == null)
             {
-                return (false, "Invalid token !", "");
+                return new NewAccessTokenModel()
+                {
+
+                    IsSuccess = false,
+                    ErrorMessage = "Invalid token !"
+                };
             }
 
-            if(loggedInUser.RefreshToken.IsExpired)
+            if (loggedInUser.RefreshToken.IsExpired)
             {
-                return (false, "Refresh token is expired! Please log in again!", "");
+                return new NewAccessTokenModel()
+                {
+
+                    IsSuccess = false,
+                    ErrorMessage = "Refresh token is expired! Please log in again!"
+                };
             }
 
             TokenValidationResult validationResult = await VerifyJWTToken(loggedInUser.JWTToken);
 
             if (validationResult.IsValid)
             {
-                return (false, "Existing token is not expired yet!", "");
+                return new NewAccessTokenModel()
+                {
+
+                    IsSuccess = false,
+                    ErrorMessage = "Existing token is not expired yet!"
+                };
             }
 
             bool isTokenExpired = validationResult.Exception is SecurityTokenExpiredException;
-            
+
             if (isTokenExpired && loggedInUser != null && loggedInUser.RefreshToken.IsExpired == false)
             {
-                loggedInUser.JWTToken = GenerateJWT(loggedInUser.UserName, loggedInUser.RoleName);                
+
+                loggedInUser.JWTToken = GenerateJWT(loggedInUser.UserName, loggedInUser.RoleName);
                 //loggedInUser.RefreshToken = GenerateRefreshToken();                
-                return (true, loggedInUser.JWTToken, loggedInUser.RefreshToken.Token);
+                //return (true, loggedInUser.JWTToken, loggedInUser.RefreshToken.Token);
+                return new NewAccessTokenModel()
+                {
+                    IsSuccess = true,
+                    NewAccessToken = loggedInUser.JWTToken,
+                    RefreshToken = loggedInUser.RefreshToken.Token
+                };
             }
-            
-            return (false, "Something went wrong !", "");
+
+            //return (false, "Something went wrong !", "");
+            return new NewAccessTokenModel()
+            {
+                IsSuccess = false,
+                ErrorMessage = "Something went wrong !"
+            };
         }
 
         private RefreshToken GenerateRefreshToken()

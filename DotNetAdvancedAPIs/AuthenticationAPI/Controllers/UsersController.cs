@@ -67,13 +67,8 @@ namespace AuthenticationAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<NewAccessTokenModel>> GetNewAccessToken(string refreshToken)
         {
-            var result = await this._userLogin.GetNewAccessToken(refreshToken);
-            NewAccessTokenModel res = new NewAccessTokenModel() {            
-                IsSuccess = result.isSuccess,
-                NewAccessToken = result.accessToken,
-                RefreshToken = result.refreshToken            
-            };
-            return Ok(res);
+            var result = await this._userLogin.GetNewAccessToken(refreshToken);            
+            return Ok(result);
         }
     }
 

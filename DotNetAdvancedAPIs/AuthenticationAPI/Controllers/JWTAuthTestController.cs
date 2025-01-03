@@ -6,30 +6,30 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthenticationAPI.Controllers
 {
-    [Route("api/[controller]/[action]")]
-    [ApiController]
-    public class JWTAuthTestController : ControllerBase
-    {
-        #region "Role based authorization"
-        [Authorize(Roles = "StoreCustomer", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpGet]
-        public ActionResult SecureCustomerRole()
-        {
-            return Ok("success");
-        }
+    //[Route("api/[controller]/[action]")]
+    //[ApiController]
+    //public class JWTAuthTestController : ControllerBase
+    //{
+    //    #region "Role based authorization"
+    //    [Authorize(Roles = "StoreCustomer", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //    [HttpGet]
+    //    public ActionResult SecureCustomerRole()
+    //    {
+    //        return Ok("success");
+    //    }
 
-        [Authorize(Roles = "Manager", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpGet]
-        public ActionResult SecureManagerRole()
-        {
-            return Ok("success");
-        }
-        #endregion
+    //    [Authorize(Roles = "Manager", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //    [HttpGet]
+    //    public ActionResult SecureManagerRole()
+    //    {
+    //        return Ok("success");
+    //    }
+    //    #endregion
 
-        [HttpGet]
-        public ActionResult NotSecure()
-        {
-            return Ok("success");
-        }
-    }
+    //    [HttpGet]
+    //    public ActionResult NotSecure()
+    //    {
+    //        return Ok("success");
+    //    }
+    //}
 }
