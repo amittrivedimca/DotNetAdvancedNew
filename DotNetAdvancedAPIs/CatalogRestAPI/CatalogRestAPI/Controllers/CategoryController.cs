@@ -16,11 +16,11 @@ namespace CatalogRestAPI.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly IApplicationManager _appManager;
-        private readonly UserService _userService;
+        //private readonly UserService _userService;
         public CategoryController(IApplicationManager applicationManager, UserService userService)
         {
             _appManager = applicationManager;
-            _userService = userService;
+            //_userService = userService;
         }
 
         /// <summary>

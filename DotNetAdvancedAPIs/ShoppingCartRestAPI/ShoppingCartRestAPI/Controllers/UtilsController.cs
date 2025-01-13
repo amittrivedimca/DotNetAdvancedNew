@@ -8,11 +8,11 @@ namespace ShoppingCartRestAPI.Controllers
     public class UtilsController : ControllerBase
     {
 
-        private readonly ILogger<UtilsController> _logger;
+        //private readonly ILogger<UtilsController> _logger;
 
         public UtilsController(ILogger<UtilsController> logger)
         {
-            _logger = logger;
+            //_logger = logger;
         }
 
         [HttpGet("ReceiveBrokerMessage")]

@@ -16,7 +16,7 @@ namespace CommonUtils
     {
         // Static HttpClient to be reused throughout the lifetime of the application.
         private static readonly HttpClient httpClient = new HttpClient();
-        MyAuthenticationOptions _options;
+        //MyAuthenticationOptions _options;
         UserService _userService;
         private string MyAuthUrl = "http://localhost:5046/api/users";
         ILogger _logger;
@@ -24,7 +24,7 @@ namespace CommonUtils
         public MyAuthenticationHandler(UserService userService, IOptionsMonitor<MyAuthenticationOptions> options, ILoggerFactory logger, UrlEncoder encoder) : base(options,logger,encoder)
         {
             _userService = userService;
-            _options = options.CurrentValue;
+            //_options = options.CurrentValue;
             _logger = logger.CreateLogger<MyAuthenticationHandler>();
         }
 

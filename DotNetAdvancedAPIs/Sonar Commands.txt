@@ -1,0 +1,10 @@
+
+Setup Sonar in local
+https://0xnehru.medium.com/comprehensive-guide-installing-and-configuring-sonarqube-on-windows-9870ae80b8e6
+
+
+Run below commands at root of project
+
+1. dotnet sonarscanner begin /k:"ShoppingCart" /d:sonar.host.url="http://localhost:9000"  /d:sonar.token="sqa_197b625db7866503c80236da4f2c417420cfcbfc"
+2. dotnet build 
+3. dotnet sonarscanner end /d:sonar.token="sqa_197b625db7866503c80236da4f2c417420cfcbfc"

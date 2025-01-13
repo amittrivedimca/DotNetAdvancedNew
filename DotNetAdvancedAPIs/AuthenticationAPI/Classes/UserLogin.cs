@@ -20,7 +20,7 @@ namespace AuthenticationAPI.Classes
         public const string secret = "fjDFFf8wur482r842r902dcFDkfvcmNGdc909323";
         LoggedInUsersCollection _loggedInUsers;
 
-        public static TokenValidationParameters TokenValidationParams = new TokenValidationParameters()
+        public static readonly TokenValidationParameters TokenValidationParams = new TokenValidationParameters()
         {
             ClockSkew = TimeSpan.Zero,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)),
