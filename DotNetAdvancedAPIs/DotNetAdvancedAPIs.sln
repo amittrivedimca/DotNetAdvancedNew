@@ -53,6 +53,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureMessageBroker", "Azure
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureMessageBroker", "MessageBroker\AzureMessageBroker\AzureMessageBroker.csproj", "{F3D35F23-D1E5-4CE4-95A4-AC8CD8509907}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DockerNotes", "DockerNotes", "{0EC759AA-9A0D-4C0E-B228-A25C18267DC6}"
+	ProjectSection(SolutionItems) = preProject
+		DockerNotes\DockerNotes.txt = DockerNotes\DockerNotes.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

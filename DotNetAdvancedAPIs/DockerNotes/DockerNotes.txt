@@ -1,0 +1,32 @@
+
+External Dependencies
+1) Shopping cart
+	- DB: liteDB
+	- MessageBroker Service
+
+2) Product Calalog
+	- DB: Sql Server
+	- MessageBroker Service 
+
+----------------------------------------------------
+To run Shopping cart using Docker.
+
+Need tu run commands from path where solution file is saved. i.e. E:\MyGithub\DotNetAdvancedNew\DotNetAdvancedAPIs
+
+Run below from cmd or powershell,
+
+1) Create an image named "shoppingcartrestapi1:v1"
+>> cd E:\MyGithub\DotNetAdvancedNew\DotNetAdvancedAPIs
+>> docker build -f .\ShoppingCartRestAPI\ShoppingCartRestAPI\Dockerfile -t shoppingcartrestapi1:v1 .
+
+2) Create and run container named "shoppingcartrestapi1_c1" from image
+>> docker run --name shoppingcartrestapi1_c1 -p 8801:8080 shoppingcartrestapi1:v1
+
+3) stop container
+docker container stop shoppingcartrestapi1_c1
+
+4) remove container
+docker rm shoppingcartrestapi1_c1
+
+5) remove image
+docker image rm shoppingcartrestapi1:v1
