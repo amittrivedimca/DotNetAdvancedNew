@@ -9,24 +9,96 @@ External Dependencies
 	- MessageBroker Service 
 
 ----------------------------------------------------
-To run Shopping cart using Docker.
-
-Need tu run commands from path where solution file is saved. i.e. E:\MyGithub\DotNetAdvancedNew\DotNetAdvancedAPIs
+To run Shopping cart using Docker,
 
 Run below from cmd or powershell,
 
-1) Create an image named "shoppingcartrestapi1:v1"
+1) Need to run commands from path where solution file is saved. i.e. E:\MyGithub\DotNetAdvancedNew\DotNetAdvancedAPIs
 >> cd E:\MyGithub\DotNetAdvancedNew\DotNetAdvancedAPIs
+
+2) Create an image named "shoppingcartrestapi1:v1"
 >> docker build -f .\ShoppingCartRestAPI\ShoppingCartRestAPI\Dockerfile -t shoppingcartrestapi1:v1 .
 
-2) Create and run container named "shoppingcartrestapi1_c1" from image
+3) Create and run container named "shoppingcartrestapi1_c1" from image
 >> docker run --name shoppingcartrestapi1_c1 -p 8801:8080 shoppingcartrestapi1:v1
 
-3) stop container
+4) Browse url : http://localhost:8801/swagger/index.html
+
+5) stop container
 docker container stop shoppingcartrestapi1_c1
 
-4) remove container
+6) remove container
 docker rm shoppingcartrestapi1_c1
 
-5) remove image
+7) remove image
 docker image rm shoppingcartrestapi1:v1
+
+----------------------------------------------------
+To run Product Calalog API using Docker,
+
+Run below from cmd or powershell,
+
+1) Need to run commands from path where solution file is saved. i.e. E:\MyGithub\DotNetAdvancedNew\DotNetAdvancedAPIs
+>> cd E:\MyGithub\DotNetAdvancedNew\DotNetAdvancedAPIs
+
+2) Create an image named "prodcatalog:v1"
+>> docker build -f .\CatalogRestAPI\CatalogRestAPI\Dockerfile -t prodcatalog:v1 .
+
+3) Create and run container named "prodcatalog_c1" from image
+>> docker run --name prodcatalog_c1 -p 8802:8080 prodcatalog:v1
+
+4) Browse url - http://localhost:8802/swagger/index.html
+
+5) stop container
+docker container stop prodcatalog_c1
+
+6) remove container
+docker rm prodcatalog_c1
+
+7) remove image
+docker image rm prodcatalog:v1
+
+----------------------------------------------------------
+Install sql server on docker - https://www.youtube.com/watch?v=Y7CMbve-Mos
+
+Container registry: mcr.microsoft.com
+Run below command
+1) Download image
+>> docker pull mcr.microsoft.com/mssql/server:2019-latest
+
+2) Run image
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Password@1" -p 1433:1433  --name sqlserver_c1 --hostname sqlserver -d mcr.microsoft.com/mssql/server:2019-latest
+
+4) Connect to Sql
+  => From Container > connect locally with sqlcmd, using its full path.
+   https://learn.microsoft.com/en-us/sql/linux/quickstart-install-connect-docker?view=sql-server-ver16&tabs=cli&pivots=cs1-powershell
+	>>	/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "Password@1" -C
+	If successful, you should get to a sqlcmd command prompt: 1>
+	>> Type to execute query
+	  1> SELECT name FROM sys.databases;
+	  2> Go
+	  3> Quit
+
+	=> From Powershell
+		>> sqlcmd -S localhost,1433 -U sa -P "Password@1"
+			If successful, you should get to a sqlcmd command prompt: 1>
+			1> SELECT name FROM sys.databases;
+			2> Go
+			3> Quit
+
+	=> From SSMS
+		Login with Conenction => Click 'Options >>' button
+			ServerName : localhost,1433
+			Authentication : Sql Server Authentication
+			Login: sa
+			Password: Password@1
+			Encryption: Mandatory
+			Checkbox : Tick 'Trust server certificate'
+			Click 'Connect' button
+
+
+3) Stop
+docker stop sqlserver_c1
+
+
+
