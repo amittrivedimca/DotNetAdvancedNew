@@ -1,0 +1,19 @@
+services:
+  shoppingcartrestapi:
+    image: ${DOCKER_REGISTRY-}shoppingcartapi_compose
+    build:
+      context: .
+      dockerfile: ShoppingCartRestAPI/ShoppingCartRestAPI/Dockerfile
+    container_name: shoppingcartapi_compose_c1        
+    
+    
+  
+
+  catalogrestapi:
+    image: ${DOCKER_REGISTRY-}catalogapi_compose
+    build:
+      context: .
+      dockerfile: CatalogRestAPI/CatalogRestAPI/Dockerfile
+    container_name: catalogapi_compose_c1
+    
+

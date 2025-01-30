@@ -100,5 +100,20 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Password@1" -p 1433:1433  --
 3) Stop
 docker stop sqlserver_c1
 
+----------------------------------------------------------
+Run Application via yaml
+ - https://www.youtube.com/watch?v=szIzaJ38pVM
+
+Run below from cmd or powershell,
+1) Build docker images
+ >> docker-compose build
+
+2) Run docker image
+ >> docker-compose up
+
+3) Stop main and dependent containers
+ >> docker-compose stop
+
+
 
 
