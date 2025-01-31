@@ -1,3 +1,10 @@
 
 Minikube setup and commands for local machine
 https://minikube.sigs.k8s.io/docs/start/?arch=%2Fwindows%2Fx86-64%2Fstable%2F.exe+download
+
+Kubernetes Introduction
+ - Container Orchestration
+	- Scaling - increase or decrease container instances
+	- Load balanceing containers
+	- Monitor containers and auto healing if container is down
+https://www.youtube.com/watch?v=dfxrdoEQe00&list=PLdpzxOOAlwvJdsW6A0jCz_3VaANuFMLpc
