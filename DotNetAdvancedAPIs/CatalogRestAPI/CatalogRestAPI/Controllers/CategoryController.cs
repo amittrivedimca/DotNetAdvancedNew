@@ -28,7 +28,7 @@ namespace CatalogRestAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet(Name = "GetAll")]
-        [Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = "MyAuth")]
+        //[Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = "MyAuth")]
         public ActionResult<IEnumerable<CategoryDTO>> GetAll()
         {
             return Ok(_appManager.CategoryProvider.GetAll());
@@ -46,7 +46,7 @@ namespace CatalogRestAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="404">Category not found</response>
         [HttpGet(Name = "GetById")]
-        [Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = "MyAuth")]
+        //[Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = "MyAuth")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<CategoryDTO>> GetById(int id)

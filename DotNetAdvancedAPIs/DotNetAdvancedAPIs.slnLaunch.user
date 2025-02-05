@@ -1,0 +1,23 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "ShoppingCartRestAPI\\ShoppingCartRestAPI\\ShoppingCartRestAPI.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "CatalogRestAPI\\CatalogRestAPI\\CatalogRestAPI.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "AuthenticationAPI\\AuthenticationAPI.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "APIGateway\\OcelotAPIGateway.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
