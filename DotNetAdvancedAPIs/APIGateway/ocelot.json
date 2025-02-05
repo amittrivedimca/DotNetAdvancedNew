@@ -23,7 +23,8 @@
       },
       "FileCacheOptions": {
         "TtlSeconds": 10 // time to cache data
-      }
+      },
+      "SwaggerKey": "CatalogAPI"
     },
     {
       "UpstreamPathTemplate": "/gateway/Category/GetById",
@@ -35,7 +36,8 @@
           "Host": "localhost",
           "Port": 5209
         }
-      ]
+      ],
+      "SwaggerKey": "CatalogAPI"
     },
 
     {
@@ -51,7 +53,8 @@
       ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "MyAuth"
-      }
+      },
+      "SwaggerKey": "CatalogAPI"
     },
     {
       "UpstreamPathTemplate": "/gateway/Category/Update",
@@ -66,12 +69,13 @@
       ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "MyAuth"
-      }
+      },
+      "SwaggerKey": "CatalogAPI"
     },
     {
       "UpstreamPathTemplate": "/gateway/Category/Delete/{id}",
       "UpstreamHttpMethod": [ "Delete" ],
-      "DownstreamPathTemplate": "/api/Category/Delete?id={id}",
+      "DownstreamPathTemplate": "/api/Category/Delete",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -81,12 +85,13 @@
       ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "MyAuth"
-      }
+      },
+      "SwaggerKey": "CatalogAPI"
     },
     {
       "UpstreamPathTemplate": "/gateway/Product/GetById/{id}",
       "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/Product/GetById?id={id}",
+      "DownstreamPathTemplate": "/api/Product/GetById",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -94,6 +99,7 @@
           "Port": 5209
         }
       ],
+      "SwaggerKey": "CatalogAPI",
       "Key": "GetProductInfo"
     },
     {
@@ -109,7 +115,8 @@
       ],
       "FileCacheOptions": {
         "TtlSeconds": 10 // time to cache data
-      }
+      },
+      "SwaggerKey": "CatalogAPI"
     },
     // Cart API Endpoints
     {
@@ -126,14 +133,48 @@
       "FileCacheOptions": {
         "TtlSeconds": 10 // time to cache data
       },
-      "Key": "GetItemInfo"
+      "Key": "GetItemInfo",
+      "SwaggerKey": "CartAPI"
     }
   ],
-  // Aggregate API Endpoints
-  "Aggregates": [
+  "Aggregates": [ // Aggregate API Endpoints
     {
       "UpstreamPathTemplate": "/gateway/productInfo/{id}",
-      "RouteKeys": [ "GetProductInfo", "GetItemInfo" ]
+      "RouteKeys": [ "GetProductInfo", "GetItemInfo" ],
+      "SwaggerKey": "GatewayAPI"
+    }
+  ],
+  "SwaggerEndPoints": [
+    //{
+    //  "Key": "GatewayAPI",
+    //  "Config": [
+    //    {
+    //      "Name": "Aggregate API",
+    //      "Version": "v1",
+    //      "Url": "http://localhost:5204/swagger/v1/swagger.json"
+    //    }
+    //  ]
+    //},
+    {
+      "Key": "CatalogAPI",
+      "Config": [
+        {
+          "Name": "Gateway Catalog API",
+          "Version": "v1",
+          "Url": "http://localhost:5209/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "CartAPI",
+      "Config": [
+        {
+          "Name": "Gateway Cart API",
+          "Version": "v1",
+          "Url": "http://localhost:5216/swagger/v1/swagger.json"
+        }
+      ]
     }
   ]
+
 }

@@ -60,7 +60,7 @@ namespace CatalogRestAPI.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Add category
         /// </summary>
         /// <param name="category"></param>
         /// <returns></returns>
@@ -89,7 +89,7 @@ namespace CatalogRestAPI.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Update category
         /// </summary>
         /// <param name="category"></param>
         /// <returns></returns>
@@ -118,6 +118,11 @@ namespace CatalogRestAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete category
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete(Name = "DeleteAsync")]
         [Authorize(Roles = "Manager,Admin", AuthenticationSchemes = "MyAuth")]
         public async Task<ActionResult<string>> DeleteAsync(int id)

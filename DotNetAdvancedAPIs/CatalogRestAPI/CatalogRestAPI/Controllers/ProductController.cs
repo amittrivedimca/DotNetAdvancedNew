@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CatalogRestAPI.Controllers
 {
+    /// <summary>
+    /// Product api
+    /// </summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
     [Produces("application/json")]
@@ -19,6 +22,13 @@ namespace CatalogRestAPI.Controllers
         }
 
 
+        /// <summary>
+        /// Get all 
+        /// </summary>
+        /// <param name="categoryID"></param>
+        /// <param name="pageNumber"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         [HttpGet("{categoryID}/{pageNumber?}/{pageSize?}")]
         //[Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = "MyAuth")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -53,6 +63,11 @@ namespace CatalogRestAPI.Controllers
             return Ok(apiResponse);
         }
 
+        /// <summary>
+        /// Get product by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet()]
         //[Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = "MyAuth")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -100,7 +115,11 @@ namespace CatalogRestAPI.Controllers
             return Ok(apiResponse);
         }
 
-
+        /// <summary>
+        /// Add product
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         [HttpPost()]
         [Authorize(Roles = "Manager", AuthenticationSchemes = "MyAuth")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -124,6 +143,11 @@ namespace CatalogRestAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Update product
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         [HttpPut()]
         [Authorize(Roles = "Manager", AuthenticationSchemes = "MyAuth")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -148,6 +172,11 @@ namespace CatalogRestAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete product by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete()]
         [Authorize(Roles = "Manager", AuthenticationSchemes = "MyAuth")]
         [ProducesResponseType(StatusCodes.Status200OK)]
