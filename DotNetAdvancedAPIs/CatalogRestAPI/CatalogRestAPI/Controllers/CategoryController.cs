@@ -67,7 +67,7 @@ namespace CatalogRestAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="400">Internal Error</response>
         [HttpPost(Name = "AddAsync")]
-        [Authorize(Roles = "Manager", AuthenticationSchemes = "MyAuth")]
+        [Authorize(Roles = "Manager,Admin", AuthenticationSchemes = "MyAuth")]
         [ProducesResponseType(StatusCodes.Status200OK)]        
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -97,7 +97,7 @@ namespace CatalogRestAPI.Controllers
         /// <response code="404">Category not found</response>
         /// <response code="400">Internal Error</response>
         [HttpPut(Name = "UpdateAsync")]
-        [Authorize(Roles = "Manager", AuthenticationSchemes = "MyAuth")]
+        [Authorize(Roles = "Manager,Admin", AuthenticationSchemes = "MyAuth")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -119,7 +119,7 @@ namespace CatalogRestAPI.Controllers
         }
 
         [HttpDelete(Name = "DeleteAsync")]
-        [Authorize(Roles = "Manager", AuthenticationSchemes = "MyAuth")]
+        [Authorize(Roles = "Manager,Admin", AuthenticationSchemes = "MyAuth")]
         public async Task<ActionResult<string>> DeleteAsync(int id)
         {
             try

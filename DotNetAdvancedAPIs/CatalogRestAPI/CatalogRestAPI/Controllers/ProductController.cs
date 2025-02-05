@@ -20,7 +20,7 @@ namespace CatalogRestAPI.Controllers
 
 
         [HttpGet("{categoryID}/{pageNumber?}/{pageSize?}")]
-        [Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = "MyAuth")]
+        //[Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = "MyAuth")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -54,7 +54,7 @@ namespace CatalogRestAPI.Controllers
         }
 
         [HttpGet()]
-        [Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = "MyAuth")]
+        //[Authorize(Roles = "Manager,StoreCustomer", AuthenticationSchemes = "MyAuth")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

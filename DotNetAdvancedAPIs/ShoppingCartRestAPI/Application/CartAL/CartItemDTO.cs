@@ -9,15 +9,9 @@ using System.Threading.Tasks;
 
 namespace Application.CartAL
 {
-    public class CartItemDTO
+    public class CartItemDTO : ItemDTO
     {
-        public string CartId { get; set; }
-        public int ItemId { get; set; }
-        [Required(ErrorMessage = "Name is required")]        
-        public string Name { get; set; }
-        public ItemImageInfoDTO ItemImage { get; set; }
-        public double Price { get; set; }
-        public double Quantity { get; set; }
+        public string CartId { get; set; }        
 
         private class Mapping : Profile
         {
@@ -27,5 +21,15 @@ namespace Application.CartAL
                 CreateMap<CartItemDTO, CartItem>();
             }
         }
+    }
+
+    public class ItemDTO
+    {
+        public int ItemId { get; set; }
+        [Required(ErrorMessage = "Name is required")]
+        public string Name { get; set; }
+        public ItemImageInfoDTO ItemImage { get; set; }
+        public double Price { get; set; }
+        public double Quantity { get; set; }
     }
 }

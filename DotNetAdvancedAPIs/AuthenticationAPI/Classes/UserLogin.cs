@@ -17,6 +17,7 @@ namespace AuthenticationAPI.Classes
         List<AppUser> UserLoginDB;        
         AppRole manager;
         AppRole customer;
+        AppRole admin;
         public const string secret = "fjDFFf8wur482r842r902dcFDkfvcmNGdc909323";
         LoggedInUsersCollection _loggedInUsers;
 
@@ -49,6 +50,17 @@ namespace AuthenticationAPI.Classes
                     Update = true
                 }
             };
+            admin = new AppRole()
+            {
+                Name = "Admin",
+                Permissions = new RolePermissions
+                {
+                    Create = true,
+                    Delete = true,
+                    Read = true,
+                    Update = true
+                }
+            };
             customer = new AppRole()
             {
                 Name = "StoreCustomer",
@@ -64,6 +76,7 @@ namespace AuthenticationAPI.Classes
             UserLoginDB = new List<AppUser>() {
              new AppUser(){ UserName = "manager", Password = "password", Role = manager },
              new AppUser(){ UserName = "customer", Password = "password", Role = customer },
+             new AppUser(){ UserName = "admin", Password = "password", Role = admin },
             };
         }
 
@@ -135,7 +148,7 @@ namespace AuthenticationAPI.Classes
             {
                 Issuer = "TestIssuer",
                 IssuedAt = DateTime.UtcNow,
-                Expires = DateTime.UtcNow.AddMinutes(2),
+                Expires = DateTime.UtcNow.AddMinutes(10),
                 Subject = identity,
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)), SecurityAlgorithms.HmacSha256Signature)
             };

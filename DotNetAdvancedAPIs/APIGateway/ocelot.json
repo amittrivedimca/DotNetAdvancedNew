@@ -3,9 +3,10 @@
     "BaseUrl": "http://localhost::5204" // url of Gateway API
   },
   "Routes": [
+    // Catalog API Endpoints
     {
       "UpstreamPathTemplate": "/gateway/Category/GetAll",
-      "UpstreamHttpMethod": ["Get"],
+      "UpstreamHttpMethod": [ "Get" ],
       "DownstreamPathTemplate": "/api/Category/GetAll",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -13,7 +14,126 @@
           "Host": "localhost",
           "Port": 5209
         }
+      ],
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "15s", // within 15 seconds
+        "Limit": 3, // 3 requests are allowed
+        "PeriodTimespan": 5 // new requests are allowed after 5 seconde
+      },
+      "FileCacheOptions": {
+        "TtlSeconds": 10 // time to cache data
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Category/GetById",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Category/GetById",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5209
+        }
       ]
+    },
+
+    {
+      "UpstreamPathTemplate": "/gateway/Category/Add",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/Category/Add",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5209
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "MyAuth"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Category/Update",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamPathTemplate": "/api/Category/Update",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5209
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "MyAuth"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Category/Delete/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamPathTemplate": "/api/Category/Delete?id={id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5209
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "MyAuth"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Product/GetById/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Product/GetById?id={id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5209
+        }
+      ],
+      "Key": "GetProductInfo"
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Product/GetAll",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Product/GetAll",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5209
+        }
+      ],
+      "FileCacheOptions": {
+        "TtlSeconds": 10 // time to cache data
+      }
+    },
+    // Cart API Endpoints
+    {
+      "UpstreamPathTemplate": "/gateway/GetItemInfo/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Cart/GetItemInfo/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5216
+        }
+      ],
+      "FileCacheOptions": {
+        "TtlSeconds": 10 // time to cache data
+      },
+      "Key": "GetItemInfo"
+    }
+  ],
+  // Aggregate API Endpoints
+  "Aggregates": [
+    {
+      "UpstreamPathTemplate": "/gateway/productInfo/{id}",
+      "RouteKeys": [ "GetProductInfo", "GetItemInfo" ]
     }
   ]
 }

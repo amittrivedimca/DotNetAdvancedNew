@@ -151,5 +151,23 @@ namespace ShoppingCartRestAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,ex);
             }
         }
+
+        /// <summary>
+        /// Get Item Info
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetItemInfo/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public ItemDTO GetItemInfo(int id)
+        {
+            return new ItemDTO()
+            {
+                ItemId = id,
+                ItemImage = null,
+                Name = "Item " + id,
+                Price = 10,
+                Quantity = 100
+            };
+        }
     }
 }
