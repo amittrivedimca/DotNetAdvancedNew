@@ -135,26 +135,30 @@
       },
       "Key": "GetItemInfo",
       "SwaggerKey": "CartAPI"
+    },
+    // Authentication API End points
+    {
+      "UpstreamPathTemplate": "/gateway/GetJWT",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/Users/JWT",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5046
+        }
+      ],      
+      "SwaggerKey": "AuthAPI"
     }
   ],
   "Aggregates": [ // Aggregate API Endpoints
     {
       "UpstreamPathTemplate": "/gateway/productInfo/{id}",
       "RouteKeys": [ "GetProductInfo", "GetItemInfo" ],
-      "SwaggerKey": "GatewayAPI"
+      "Description": "Get aggregated product info from product and cart service"
     }
   ],
   "SwaggerEndPoints": [
-    //{
-    //  "Key": "GatewayAPI",
-    //  "Config": [
-    //    {
-    //      "Name": "Aggregate API",
-    //      "Version": "v1",
-    //      "Url": "http://localhost:5204/swagger/v1/swagger.json"
-    //    }
-    //  ]
-    //},
     {
       "Key": "CatalogAPI",
       "Config": [
@@ -172,6 +176,16 @@
           "Name": "Gateway Cart API",
           "Version": "v1",
           "Url": "http://localhost:5216/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "AuthAPI",
+      "Config": [
+        {
+          "Name": "Gateway Auth API",
+          "Version": "v1",
+          "Url": "http://localhost:5046/swagger/v1/swagger.json"
         }
       ]
     }

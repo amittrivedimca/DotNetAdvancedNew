@@ -76,6 +76,7 @@ services.AddOcelot(builder.Configuration)
 
 services.AddSwaggerForOcelot(builder.Configuration, o => {
     //o.GenerateDocsForGatewayItSelf = true;
+    o.GenerateDocsForAggregates = true;
     o.GenerateDocsDocsForGatewayItSelf(opt =>
     {        
         opt.GatewayDocsTitle = "My Gateway";
@@ -93,7 +94,7 @@ var app = builder.Build();
 
 app.UseSwaggerForOcelotUI(opt =>
 {
-    opt.ReConfigureUpstreamSwaggerJson = OcelotSwaggerUtils.AlterUpstreamSwaggerJson;
+    //opt.ReConfigureUpstreamSwaggerJson = OcelotSwaggerUtils.AlterUpstreamSwaggerJson;
     opt.PathToSwaggerGenerator = "/swagger/docs";
 });
 await app.UseOcelot();
