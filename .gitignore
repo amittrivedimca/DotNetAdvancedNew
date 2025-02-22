@@ -39,3 +39,6 @@
 /DotNetAdvancedAPIs/CommonUtils/obj
 /DotNetAdvancedAPIs/.sonarqube
 /DotNetAdvancedAPIs/obj/Docker
+/DotNetAdvancedAPIs/APIGateway/bin/Debug/net8.0
+/DotNetAdvancedAPIs/APIGateway/obj/Debug/net8.0
+/DotNetAdvancedAPIs/APIGateway/obj
