@@ -5,3 +5,4 @@
 4. Message Broker
 5. Code Quality - Sonar
 6. Containerization and Orchestration
+7. API Gateway
